@@ -1,0 +1,50 @@
+<head>
+<meta charset="utf-8" />
+<title>PMXDR testing...</title>
+<!-- <script type="text/javascript" src="pmxdr-client.js"></script> -->
+<script type="text/javascript" src="pmxdr.min.js"></script>
+</head>
+<body>
+	<h1>Cross domain messaging using PMXDR</h1>
+	<em id="testing">Ruby + Sinatra + pmxdr</em>
+	
+	<h2>Results:</h2>
+	<strong>All tests are being requested from a remote domain, saranyan.name:9393. An API call is being made via 
+		post to saranyan.name/api/token and a JSON token is returned.</strong>
+	<div id="results"></div>
+
+</body>
+
+<script type="text/javascript">
+
+var pmxdrInterface = new pmxdr("http://saranyan.name:9393/");
+pmxdrInterface.onload = function() {
+    this.request([{
+        method  : "post",
+        uri     : "/api/token",
+        data    : "",
+        callback: handleResponse,
+        headers : {},
+        timeout : 30000 /* == 30 seconds*/
+    }]);
+ 
+}
+function handleResponse(response) {
+	  //alert(response.data);
+    // do stuff with response
+		console.log(response);
+		var code;
+		codeContainer = document.createElement("pre");
+		if ( !response.error ) {
+         code += "\n\ndata:\n"+response.data;
+       } else code += (errorIsGood? "(PASS) " : "(FAIL) ")+"Error: "+response.error;
+       
+       //codeContainer.appendChild(document.createTextNode(code));
+       results.appendChild(document.createTextNode(code));
+       //results.appendChild(document.createElement("hr"));
+		//
+    pmxdrInterface.unload();
+}
+pmxdrInterface.init();
+
+</script>
