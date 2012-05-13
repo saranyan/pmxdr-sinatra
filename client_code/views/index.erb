@@ -9,7 +9,7 @@
 	<em id="testing">Ruby + Sinatra + pmxdr</em>
 	
 	<h2>Results:</h2>
-	<strong>All tests are being requested from a remote domain, saranyan.name:9393. An API call is being made via 
+	<strong>All tests are being requested from a remote domain, mylocal.name:9393. An API call is being made via 
 		post to saranyan.name/api/token and a JSON token is returned.</strong>
 	<div id="results"></div>
 
@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 
-var pmxdrInterface = new pmxdr("http://saranyan.name:9393/");
+var pmxdrInterface = new pmxdr("http://mylocal.name:9393/");
 pmxdrInterface.onload = function() {
     this.request([{
         method  : "post",
